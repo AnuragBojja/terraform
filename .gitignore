@@ -1,0 +1,27 @@
+# Terraform generated files and directories
+.terraform/
+.terraform.tfstate.lock.info
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.*.backup
+crash.log
+crash.*.log
+
+# Variable files that might contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# Override files (use sparingly)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Environment-specific files
+.env
+.local
