@@ -18,9 +18,10 @@ variable "instances" {
   # }  
 }
 
-variable "cnt" {
-  default = 4
-}
+# variable "cnt" {
+#   default = 4
+# }
+
 variable "cidr" {
   default = ["0.0.0.0/0"]
 }

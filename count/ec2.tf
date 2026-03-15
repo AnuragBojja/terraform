@@ -36,4 +36,4 @@ resource "aws_route53_record" "roboshop" {
   type    = "A"
   ttl     = 1
   records = [aws_instance.terraform[count.index].private_ip]
-}
+} 
