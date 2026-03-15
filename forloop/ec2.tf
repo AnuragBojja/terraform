@@ -1,11 +1,13 @@
 resource "aws_instance" "terraform" {
-  count = length(var.instances)
-  ami           = var.ami_id
-  instance_type = var.instance_type
+  for_each = var.instance
+  #for_each = toset(var.instance)
+  ami           = each.value.ami
+  instance_type = each.value.instance_type
   vpc_security_group_ids = [aws_security_group.terraform_sg.id]
   tags = {
-    Name = var.instances[count.index]
-    }
+    Name = each.key
+    Terraform = "true"
+  }
 }
 
 resource "aws_security_group" "terraform_sg" {
@@ -15,25 +17,26 @@ resource "aws_security_group" "terraform_sg" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    cidr_blocks     = var.cidr
+    cidr_blocks     = ["0.0.0.0/0"]
   }
   ingress {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    cidr_blocks     = var.cidr
+    cidr_blocks     = ["0.0.0.0/0"]
   }
   tags = {
     Name = "terraform_sg"
   }
 }
+  
 
 resource "aws_route53_record" "roboshop" {
-  count = length(var.instances)
+  for_each = aws_instance.terraform
   zone_id = var.zone_id
-  name    = "${var.instances[count.index]}.${var.domain_name}"
+  name    = "${each.key}.${var.domain_name}"
   #name = "${aws_instance.terraform[count.index].tags.Name}.${var.domain_name}"
   type    = "A"
   ttl     = 1
-  records = [aws_instance.terraform[count.index].private_ip]
+  records = [each.value.private_ip]
 }  
