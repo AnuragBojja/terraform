@@ -1,7 +1,7 @@
 resource "aws_instance" "terraform" {
   for_each = var.instance
   #for_each = toset(var.instance)
-  ami           = each.value.ami
+  ami           = data.aws_ami.roboshop_ami.id
   instance_type = each.value.instance_type
   vpc_security_group_ids = [aws_security_group.terraform_sg.id]
   tags = {
