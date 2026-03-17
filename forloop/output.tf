@@ -1,4 +1,4 @@
 # output "instances_output" {
-#     value = aws_instance.terraform
+#     value = var.instance.mongodb.ami.pro
 #     #value = aws_instance.terraform[*].tags.Name
 # }

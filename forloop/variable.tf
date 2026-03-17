@@ -13,7 +13,7 @@ variable "instance" {
             instance_type = "t3.micro"
         }
     }
-    #default = [ "mongodb","mysql","redis","rabbitmq" ]
+#   default = [ "mongodb","mysql","redis","rabbitmq" ]
 #   default = {
 #     ### <service-name>  = <instance_type>
 #     mongodb = "t3.micro"
